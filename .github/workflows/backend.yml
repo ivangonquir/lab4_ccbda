@@ -23,6 +23,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify Required Secrets (Node.js)
+        shell: node {0}
+        run: |
+          const required = [
+            "AWS_ACCESS_KEY_ID",
+            "AWS_DEFAULT_REGION",
+            "AWS_SECRET_ACCESS_KEY",
+            "AWS_USER_ID",
+            "ECR_REPOSITORY",
+            "ELASTIC_BEANSTALK_APP_NAME",
+            "ELASTIC_BEANSTALK_ENV_NAME"
+          ];
+          
+          const secrets = JSON.parse(process.env.SECRETS_JSON);
+          const missing = required.filter(key => !secrets[key]);
+          
+          if (missing.length > 0) {
+            console.error("Missing Secrets:", missing.join(", "));
+            process.exit(1);
+          }
+          console.log("All required secrets are present.");
+        env:
+          SECRETS_JSON: ${{ toJson(secrets) }}
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
