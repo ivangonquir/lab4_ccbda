@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ccbda-crud"
+version = "0.1.0"
+description = "Simple FastAPI CRUD API"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi[standard]>=0.110", # Includes uvicorn & httpx automatically
+    "pydantic[email]>=2.0",
+    "boto3>=1.42.41"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.envs.default]
+# This defines the dev dependencies inside the environment directly
+dependencies = [
+    "moto[dynamodb]>=5.0",
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "pyright>=1.1.0",
+    "ruff>=0.1.0",
+]
+
+[tool.hatch.envs.default.scripts]
+serve = "uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
+test = "pytest {args}"
+test-cov = "pytest --cov=src --cov-report=term-missing {args}"
+lint = "ruff check ."
+format = "ruff format ."
+typecheck = "pyright ."
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+lint.select = ["E", "F", "W", "I", "N", "UP"]

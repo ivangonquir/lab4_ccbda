@@ -1,0 +1,20 @@
+FROM python:3.13-slim
+
+# Create the app directory
+RUN mkdir /app
+
+# Set the working directory inside the container
+WORKDIR /app
+
+COPY pyproject.toml ./pyproject.toml
+COPY src ./src
+
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir .
+
+# Ensure uvicorn exists in the final image (even if not declared in pyproject deps)
+RUN pip install --no-cache-dir "uvicorn[standard]>=0.24"
+
+EXPOSE 8000
+
+CMD ["uvicorn","src.main:app","--host","0.0.0.0","--port","8000"]

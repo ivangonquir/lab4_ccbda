@@ -1,0 +1,16 @@
+services:
+  api-test:
+    build:
+      context: backend
+      dockerfile: Dockerfile_testing
+    container_name: fastapi-api-test
+    command: python -m pytest -v --disable-warnings --maxfail=1
+    environment:
+      - FRONTEND_URLS=${FRONTEND_URLS}
+      - STORAGE_TABLE=${STORAGE_TABLE}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    volumes:
+      - .:/app
+    working_dir: /app

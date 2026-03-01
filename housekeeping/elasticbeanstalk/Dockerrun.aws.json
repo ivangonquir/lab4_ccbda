@@ -1,0 +1,11 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "<AWS-USER-ID>.dkr.ecr.<AWS-REGION>.amazonaws.com/backend-webapp-docker-repo:v<X>.<Y>.<Z>"
+    },
+    "Ports": [
+        {
+            "ContainerPort": 8000
+        }
+    ]
+}

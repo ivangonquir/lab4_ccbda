@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+.Python
+.venv/
+venv/
+.DS_Store
+
+# Environment
+.env
+.env.*
+
+# Backend data
+backend/items.json
+
+# IDE
+.idea/
+*.iml
+.ai/
+
+# Node / frontend
+node_modules/
+*-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+.next/
+out/
+
+# Backend
+.coverage
+logs/
+
+# Housekeeping
+.elasticbeanstalk/
