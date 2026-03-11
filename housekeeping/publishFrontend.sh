@@ -1,8 +1,8 @@
 #!/bin/bash
 
-MY_TEAM=<YOUR-TEAM-NUMBER>
+MY_TEAM=team5
 BUCKET_NAME="next-js-${MY_TEAM}.2026-spring.ccbda.upc.edu"
-AWS_REGION="eu-west-1"
+AWS_REGION="eu-north-1"
 
 cd frontend
 npm install --save-dev dotenv-cli
