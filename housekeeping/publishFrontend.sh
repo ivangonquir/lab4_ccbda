@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MY_TEAM=team5
+MY_TEAM=team4-5
 BUCKET_NAME="next-js-${MY_TEAM}.2026-spring.ccbda.upc.edu"
 AWS_REGION="eu-north-1"
 
