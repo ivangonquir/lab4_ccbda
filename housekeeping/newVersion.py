@@ -63,6 +63,8 @@ def create_git_tag(repo, version_name):
 
         print(f"Pushing to remote...")
         origin = repo.remote(name='origin')
+        current_branch = repo.active_branch.name
+        repo.git.push('--set-upstream', origin.name, current_branch)
         origin.push()  # Push the commit with the updated JSON
         origin.push(new_tag)  # Push the version tag
         return True
@@ -81,6 +83,7 @@ if __name__ == "__main__":
     repo_path = os.path.abspath("..")
 
     with Repo(repo_path) as repo:
+        print(repo)
         new_v = get_next_version(repo, args.level)
         print(f"Targeting version: {new_v}")
 
